@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { X, Star, Minus, Plus, ShoppingCart } from 'lucide-react';
-import { Product, Review, supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 
 type ProductDetailProps = {
@@ -20,15 +19,7 @@ export default function ProductDetail({ product, onClose }: ProductDetailProps) 
     fetchReviews();
   }, [product.id]);
 
-  const fetchReviews = async () => {
-    const { data } = await supabase
-      .from('reviews')
-      .select('*, profiles(full_name)')
-      .eq('product_id', product.id)
-      .order('created_at', { ascending: false });
-
-    if (data) setReviews(data);
-  };
+  
 
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();

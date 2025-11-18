@@ -31,24 +31,7 @@ function App() {
     }
   }, [selectedCategory, products]);
 
-  const fetchProducts = async () => {
-    const { data } = await supabase
-      .from('products')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (data) setProducts(data);
-    if (data) setFilteredProducts(data);
-  };
-
-  const fetchReviews = async () => {
-    const { data } = await supabase
-      .from('reviews')
-      .select('*');
-
-    if (data) setReviews(data);
-  };
-
+  
   const handleSearchChange = (query: string) => {
     if (!query.trim()) {
       setFilteredProducts(
